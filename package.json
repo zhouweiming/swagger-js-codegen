@@ -1,7 +1,7 @@
 {
   "name": "swagger-js-codegen2",
   "main": "./lib/codegen.js",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A Swagger codegen for JavaScript",
   "scripts": {
     "test": "grunt",
