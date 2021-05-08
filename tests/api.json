@@ -1,0 +1,1767 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is a sample server Petstore server.  You can find out more about     Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).      For this sample, you can use the api key `special-key` to test the authorization     filters.",
+    "version": "1.0.0",
+    "title": "Swagger Petstore",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "weiming.zhou@captain-cro.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "localhost",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "company"
+    },
+    {
+      "name": "department"
+    },
+    {
+      "name": "profile"
+    },
+    {
+      "name": "role"
+    },
+    {
+      "name": "project"
+    },
+    {
+      "name": "project_template"
+    }
+  ],
+  "paths": {
+    "/api/v1/companies/applications": {
+      "get": {
+        "tags": [
+          "company"
+        ],
+        "summary": "",
+        "operationId": "getCompanyApplications",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                },
+                "current_stamp": {
+                  "type": "integer"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "应用列表",
+                  "items": {
+                    "$ref": "#/definitions/ICompanyApplication"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/companies/applications/{application_id}/toggle-active": {
+      "put": {
+        "tags": [
+          "company"
+        ],
+        "summary": "",
+        "operationId": "toggleCompanyApplicationActived",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "application_id",
+            "in": "path",
+            "description": "应用id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "is_actived"
+              ],
+              "properties": {
+                "is_actived": {
+                  "type": "boolean",
+                  "description": "是否启用"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                },
+                "current_stamp": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/companies/applications/{application_id}/config": {
+      "put": {
+        "tags": [
+          "company"
+        ],
+        "summary": "",
+        "operationId": "modifyCompanyApplicationConfig",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "application_id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "config"
+              ],
+              "properties": {
+                "config": {
+                  "$ref": "#/definitions/ICompanyApplicationConfig"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                },
+                "current_stamp": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/department/list": {
+      "post": {
+        "tags": [
+          "department"
+        ],
+        "summary": "",
+        "operationId": "getAllDepartments",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                },
+                "current_stamp": {
+                  "type": "integer"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "部门列表",
+                  "items": {
+                    "$ref": "#/definitions/IDepartment"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/department/{id}/user/list": {
+      "post": {
+        "tags": [
+          "department"
+        ],
+        "summary": "",
+        "operationId": "getUsersByDepartment",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "部门id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                },
+                "current_stamp": {
+                  "type": "integer"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "成员列表",
+                  "items": {
+                    "$ref": "#/definitions/IDepartmentUser"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/profile/info": {
+      "get": {
+        "tags": [
+          "profile"
+        ],
+        "summary": "",
+        "operationId": "getProfileInfo",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                },
+                "current_stamp": {
+                  "type": "integer"
+                },
+                "data": {
+                  "$ref": "#/definitions/IProfile"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/profile/menu/list": {
+      "get": {
+        "tags": [
+          "profile"
+        ],
+        "summary": "",
+        "operationId": "getProfileMenus",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                },
+                "current_stamp": {
+                  "type": "integer"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/IMenuItem"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/profile/company": {
+      "get": {
+        "tags": [
+          "profile"
+        ],
+        "summary": "",
+        "operationId": "getProfile",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/api/v1/role/list": {
+      "post": {
+        "tags": [
+          "role"
+        ],
+        "summary": "",
+        "operationId": "getAllRoles",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                },
+                "current_stamp": {
+                  "type": "integer"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "角色列表",
+                  "items": {
+                    "$ref": "#/definitions/IRole"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/role/{id}/user/list": {
+      "post": {
+        "tags": [
+          "role"
+        ],
+        "summary": "",
+        "operationId": "getUsersByRole",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                },
+                "current_stamp": {
+                  "type": "integer"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "用户列表",
+                  "items": {
+                    "$ref": "#/definitions/IRoleUser"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/roles": {
+      "post": {
+        "tags": [
+          "role"
+        ],
+        "summary": "",
+        "operationId": "addRole",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "name",
+                "role_type"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "角色名称"
+                },
+                "parent_id": {
+                  "type": "integer",
+                  "description": "上级角色id"
+                },
+                "role_type": {
+                  "type": "integer",
+                  "description": "角色类型"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                },
+                "current_stamp": {
+                  "type": "integer"
+                },
+                "data": {
+                  "$ref": "#/definitions/IRole"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/roles/{id}": {
+      "put": {
+        "tags": [
+          "role"
+        ],
+        "summary": "",
+        "operationId": "modifyRole",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "角色id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "角色名称"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                },
+                "current_stamp": {
+                  "type": "integer"
+                },
+                "data": {
+                  "$ref": "#/definitions/IRole"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "role"
+        ],
+        "summary": "",
+        "operationId": "deleteRole",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "角色id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                },
+                "current_stamp": {
+                  "type": "integer"
+                },
+                "data": {
+                  "$ref": "#/definitions/IRole"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/roles/system": {
+      "get": {
+        "tags": [
+          "role"
+        ],
+        "summary": "",
+        "operationId": "getSystemRoles",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "角色名称"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                },
+                "current_stamp": {
+                  "type": "integer"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "角色列表",
+                  "items": {
+                    "$ref": "#/definitions/IRole"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/projects/{id}/restore": {
+      "get": {
+        "tags": [
+          "project"
+        ],
+        "summary": "",
+        "operationId": "restoreProject",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                },
+                "current_stamp": {
+                  "type": "integer"
+                },
+                "data": {
+                  "$ref": "#/definitions/IProjectMdel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/projects/everyday-report": {
+      "get": {
+        "tags": [
+          "project"
+        ],
+        "summary": "",
+        "operationId": "sendReportEveryday",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                },
+                "current_stamp": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/projects/users/{user_id}/everyday-tasks": {
+      "get": {
+        "tags": [
+          "project"
+        ],
+        "summary": "",
+        "operationId": "getEverydayTasksByUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                },
+                "current_stamp": {
+                  "type": "integer"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "任务报告信息",
+                  "items": {
+                    "$ref": "#/definitions/IProjectTaskEveryDayByUser"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/project/profile/progress/list": {
+      "get": {
+        "tags": [
+          "project"
+        ],
+        "summary": "",
+        "operationId": "getProjectStageNames",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                },
+                "current_stamp": {
+                  "type": "integer"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "项目阶段信息",
+                  "items": {
+                    "$ref": "#/definitions/IProjectProgress"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/project/status/list": {
+      "get": {
+        "tags": [
+          "project"
+        ],
+        "summary": "",
+        "operationId": "getProjectStatus",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                },
+                "current_stamp": {
+                  "type": "integer"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "状态信息",
+                  "items": {
+                    "$ref": "#/definitions/IProjectStatus"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/projects": {
+      "get": {
+        "tags": [
+          "project"
+        ],
+        "summary": "",
+        "operationId": "getAllProjects",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "page_index",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "description": ""
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "description": ""
+          },
+          {
+            "name": "keywords",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "project_ids",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "description": "",
+            "enum": [
+              1,
+              2,
+              3,
+              4
+            ]
+          },
+          {
+            "name": "order_by",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "order_rule",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                },
+                "current_stamp": {
+                  "type": "integer"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "count"
+                  ],
+                  "properties": {
+                    "count": {
+                      "type": "integer"
+                    },
+                    "list": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/definitions/IProjectListItem"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/project_templates": {
+      "get": {
+        "tags": [
+          "project_template"
+        ],
+        "summary": "",
+        "operationId": "getProjectTemplates",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                },
+                "current_stamp": {
+                  "type": "integer"
+                },
+                "data": {
+                  "type": "array",
+                  "description": "模板基础信息",
+                  "items": {
+                    "$ref": "#/definitions/IProjectTemplateSelectListItem"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/project_templates/{id}": {
+      "get": {
+        "tags": [
+          "project_template"
+        ],
+        "summary": "",
+        "operationId": "getProjectTemplateDetail",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                },
+                "current_stamp": {
+                  "type": "integer"
+                },
+                "data": {
+                  "$ref": "#/definitions/IProjectTemplateDetail"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "project_template"
+        ],
+        "summary": "",
+        "operationId": "saveTemplateConfig",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": [
+                "config"
+              ],
+              "properties": {
+                "config": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                },
+                "current_stamp": {
+                  "type": "integer"
+                },
+                "data": {
+                  "$ref": "#/definitions/IDingtalkProjectTemplateRelationshipModel"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "project_template"
+        ],
+        "summary": "",
+        "operationId": "removeTemplate",
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                },
+                "current_stamp": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {},
+  "definitions": {
+    "ICompanyApplicationConfig": {
+      "type": "object",
+      "properties": {
+        "color": {
+          "type": "string",
+          "description": "主题色"
+        },
+        "icon": {
+          "type": "string",
+          "description": "图标"
+        },
+        "showInTargetModuleWhenConfig": {
+          "type": "string",
+          "description": "是否出现在目标模块的配置界面"
+        },
+        "showInTargetModuleWhenUse": {
+          "type": "string",
+          "description": "是否出现在目标模块的使用/运行界面"
+        }
+      }
+    },
+    "ICompanyApplication": {
+      "type": "object",
+      "properties": {
+        "app_key": {
+          "type": "string",
+          "description": "应用全局唯一key"
+        },
+        "config": {
+          "$ref": "#/definitions/ICompanyApplicationConfig"
+        },
+        "description": {
+          "type": "string",
+          "description": "备注"
+        },
+        "id": {
+          "type": "string",
+          "description": "应用id"
+        },
+        "is_actived": {
+          "type": "string",
+          "description": "是否启用"
+        },
+        "name": {
+          "type": "string",
+          "description": "应用名"
+        },
+        "type": {
+          "type": "integer",
+          "description": "应用类型"
+        }
+      }
+    },
+    "IDepartment": {
+      "type": "object",
+      "required": [
+        "company_id",
+        "id",
+        "name"
+      ],
+      "properties": {
+        "company_id": {
+          "type": "integer",
+          "description": "企业id"
+        },
+        "created_at": {
+          "type": "string",
+          "description": "创建时间"
+        },
+        "deleted_at": {
+          "type": "string",
+          "description": "删除时间"
+        },
+        "id": {
+          "type": "integer",
+          "description": "部门id"
+        },
+        "is_actived": {
+          "type": "boolean",
+          "description": "是否激活"
+        },
+        "is_deleted": {
+          "type": "boolean",
+          "description": "是否删除"
+        },
+        "name": {
+          "type": "string",
+          "description": "部门名称"
+        },
+        "parent_id": {
+          "type": "integer",
+          "description": "上级部门id"
+        },
+        "updated_at": {
+          "type": "string",
+          "description": "更新时间"
+        }
+      }
+    },
+    "IDepartmentUser": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "avatar",
+        "phone"
+      ],
+      "properties": {
+        "company_id": {
+          "type": "integer",
+          "description": "企业id"
+        },
+        "id": {
+          "type": "integer",
+          "description": "用户id"
+        },
+        "name": {
+          "type": "string",
+          "description": "用户名"
+        },
+        "avatar": {
+          "type": "string",
+          "description": "用户头像链接"
+        },
+        "phone": {
+          "type": "string",
+          "description": "手机号"
+        },
+        "is_actived": {
+          "type": "boolean",
+          "description": "是否激活"
+        },
+        "is_deleted": {
+          "type": "boolean",
+          "description": "是否删除"
+        }
+      }
+    },
+    "IBaseRole": {
+      "type": "object",
+      "properties": {
+        "company_id": {
+          "type": "integer",
+          "description": "企业id"
+        },
+        "id": {
+          "type": "integer",
+          "description": "角色id"
+        },
+        "name": {
+          "type": "string",
+          "description": "角色名称"
+        }
+      }
+    },
+    "IProfile": {
+      "type": "object",
+      "required": [
+        "id",
+        "name"
+      ],
+      "properties": {
+        "company_id": {
+          "type": "integer",
+          "description": "企业id"
+        },
+        "id": {
+          "type": "integer",
+          "description": "用户id"
+        },
+        "name": {
+          "type": "string",
+          "description": "用户姓名"
+        },
+        "avatar": {
+          "type": "string",
+          "description": "用户头像链接"
+        },
+        "email": {
+          "type": "string",
+          "description": "用户邮箱"
+        },
+        "created_at": {
+          "type": "string",
+          "description": "创建时间"
+        },
+        "deleted_at": {
+          "type": "string",
+          "description": "删除时间"
+        },
+        "updated_at": {
+          "type": "string",
+          "description": "更新时间"
+        },
+        "is_actived": {
+          "type": "boolean",
+          "description": "是否激活"
+        },
+        "is_deleted": {
+          "type": "boolean",
+          "description": "是否删除"
+        },
+        "account_name": {
+          "type": "string",
+          "description": "用户登录用户名"
+        },
+        "company_name": {
+          "type": "string",
+          "description": "企业名称"
+        },
+        "last_login_at": {
+          "type": "string",
+          "description": "最近一次登录时间"
+        },
+        "last_success_sync_info_at": {
+          "type": "string",
+          "description": "最近一次数据同步成功时间"
+        },
+        "login_type": {
+          "type": "string",
+          "description": "登录类型"
+        },
+        "password": {
+          "type": "string",
+          "description": "密码"
+        },
+        "phone": {
+          "type": "string",
+          "description": "手机号"
+        },
+        "roles": {
+          "type": "array",
+          "description": "角色列表",
+          "items": {
+            "$ref": "#/definitions/IBaseRole"
+          }
+        },
+        "type": {
+          "type": "integer",
+          "description": "用户类型"
+        }
+      }
+    },
+    "IMenuItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "parent_id": {
+          "type": "integer"
+        },
+        "url": {
+          "type": "string"
+        },
+        "weight": {
+          "type": "integer"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IMenuItem"
+          }
+        }
+      }
+    },
+    "IRole": {
+      "type": "object",
+      "properties": {
+        "company_id": {
+          "type": "integer",
+          "description": "企业id"
+        },
+        "id": {
+          "type": "integer",
+          "description": "角色id"
+        },
+        "name": {
+          "type": "string",
+          "description": "角色名称"
+        },
+        "code": {
+          "type": "string",
+          "description": "唯一编号"
+        },
+        "created_at": {
+          "type": "string",
+          "description": "创建时间"
+        },
+        "deleted_at": {
+          "type": "string",
+          "description": "删除时间"
+        },
+        "is_actived": {
+          "type": "boolean",
+          "description": "是否激活"
+        },
+        "is_deleted": {
+          "type": "boolean",
+          "description": "是否删除"
+        },
+        "last_success_sync_info_at": {
+          "type": "string",
+          "description": "最近一次同步数据成功时间"
+        },
+        "parent_id": {
+          "type": "integer",
+          "description": "上级角色id"
+        },
+        "role_type": {
+          "type": "integer",
+          "description": "角色类型"
+        },
+        "updated_at": {
+          "type": "string",
+          "description": "更新时间"
+        }
+      }
+    },
+    "IRoleUser": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "avatar",
+        "phone"
+      ],
+      "properties": {
+        "company_id": {
+          "type": "integer",
+          "description": "企业id"
+        },
+        "company_name": {
+          "type": "string",
+          "description": "企业名称"
+        },
+        "id": {
+          "type": "integer",
+          "description": "用户id"
+        },
+        "name": {
+          "type": "string",
+          "description": "用户名"
+        },
+        "avatar": {
+          "type": "string",
+          "description": "用户头像链接"
+        },
+        "phone": {
+          "type": "string",
+          "description": "手机号"
+        },
+        "is_actived": {
+          "type": "boolean",
+          "description": "是否激活"
+        },
+        "is_deleted": {
+          "type": "boolean",
+          "description": "是否删除"
+        },
+        "relationship_id": {
+          "type": "integer",
+          "description": "关系表id"
+        }
+      }
+    },
+    "IProjectMdel": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": ""
+        },
+        "company_id": {
+          "type": "integer",
+          "description": "企业id"
+        },
+        "name": {
+          "type": "string",
+          "description": "模版名称"
+        }
+      }
+    },
+    "IProjectTaskEveryDayByUser": {
+      "type": "object",
+      "required": [
+        "name",
+        "belong"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "belong": {
+          "type": "string"
+        }
+      }
+    },
+    "IProjectProgress": {
+      "type": "object",
+      "required": [
+        "name",
+        "stages"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "stages": {
+          "type": "string"
+        }
+      }
+    },
+    "IProjectStatus": {
+      "type": "object",
+      "required": [
+        "id",
+        "name"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "IProjectListItem": {
+      "type": "object",
+      "required": [
+        "collection_id",
+        "current_project_milestone_id",
+        "ended_at",
+        "id",
+        "inclusion",
+        "is_collection",
+        "is_delay",
+        "manager_id",
+        "manager_name",
+        "plan_inclusion",
+        "product_name",
+        "project_milestone_name",
+        "seq_no",
+        "status",
+        "week_inclusion"
+      ],
+      "properties": {
+        "collection_id": {
+          "type": "integer"
+        },
+        "current_project_milestone_id": {
+          "type": "integer"
+        },
+        "ended_at": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "inclusion": {
+          "type": "integer"
+        },
+        "is_collection": {
+          "type": "boolean"
+        },
+        "is_delay": {
+          "type": "boolean"
+        },
+        "manager_id": {
+          "type": "integer"
+        },
+        "manager_name": {
+          "type": "string"
+        },
+        "plan_inclusion": {
+          "type": "integer"
+        },
+        "product_name": {
+          "type": "string"
+        },
+        "project_milestone_name": {
+          "type": "string"
+        },
+        "seq_no": {
+          "type": "string"
+        },
+        "status": {
+          "type": "integer"
+        },
+        "week_inclusion": {
+          "type": "integer"
+        }
+      }
+    },
+    "IProjectTemplateSelectListItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": ""
+        },
+        "name": {
+          "type": "string",
+          "description": "模版名称"
+        },
+        "remark": {
+          "type": "string",
+          "description": "备注"
+        },
+        "type": {
+          "type": "integer",
+          "description": "项目模板类型，app.enum.PROJECT.TEMPLATE.TYPE"
+        }
+      }
+    },
+    "IProjectTemplateModel": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": ""
+        },
+        "company_id": {
+          "type": "integer",
+          "description": "企业id"
+        },
+        "name": {
+          "type": "string",
+          "description": "模版名称"
+        },
+        "content": {
+          "type": "object",
+          "description": "模版详情"
+        },
+        "project_id": {
+          "type": "integer",
+          "description": "基于的项目id"
+        },
+        "type": {
+          "type": "integer",
+          "description": "项目模板类型，app.enum.PROJECT.TEMPLATE.TYPE"
+        },
+        "user_id": {
+          "type": "integer",
+          "description": "创建者id，系统为-999"
+        },
+        "remark": {
+          "type": "string",
+          "description": "备注"
+        }
+      }
+    },
+    "IProjectTemplateDetail": {
+      "type": "object",
+      "properties": {
+        "project_template": {
+          "$ref": "#/definitions/IProjectTemplateModel"
+        }
+      }
+    },
+    "IDingtalkProjectTemplateRelationshipModel": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": ""
+        },
+        "company_id": {
+          "type": "integer",
+          "description": ""
+        },
+        "config": {
+          "type": "object",
+          "description": "预设配置"
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  }
+}
