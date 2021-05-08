@@ -4,7 +4,7 @@
 ## We are looking for a new maintainer
 
 This project is no longer actively maintained by its creator. Please let us know if you would like to become a maintainer.
-At the time we wrote this package, the swagger didn't have generators for JavaScript nor TypeScript. Now there are [great alternatives of this package available](https://github.com/swagger-api/swagger-codegen). 
+At the time we wrote this package, the swagger didn't have generators for JavaScript nor TypeScript. Now there are [great alternatives of this package available](https://github.com/swagger-api/swagger-codegen).
 
 This package generates a nodejs, reactjs or angularjs class from a [swagger specification file](https://github.com/wordnik/swagger-spec). The code is generated using [mustache templates](https://github.com/wcandillon/swagger-js-codegen/tree/master/templates) and is quality checked by [jshint](https://github.com/jshint/jshint/) and beautified by [js-beautify](https://github.com/beautify-web/js-beautify).
 
@@ -12,20 +12,20 @@ The typescript generator is based on [superagent](https://github.com/visionmedia
 
 ## Installation
 ```bash
-npm install swagger-js-codegen
+npm install swagger-js-codegen2
 ```
 
 ## Example
 ```javascript
 var fs = require('fs');
-var CodeGen = require('swagger-js-codegen').CodeGen;
+var CodeGen = require('swagger-js-codegen2').CodeGen;
 
 var file = 'swagger/spec.json';
 var swagger = JSON.parse(fs.readFileSync(file, 'UTF-8'));
 var nodejsSourceCode = CodeGen.getNodeCode({ className: 'Test', swagger: swagger });
 var angularjsSourceCode = CodeGen.getAngularCode({ className: 'Test', swagger: swagger });
 var reactjsSourceCode = CodeGen.getReactCode({ className: 'Test', swagger: swagger });
-var tsSourceCode = CodeGen.getTypescriptCode({ className: 'Test', swagger: swagger, imports: ['../../typings/tsd.d.ts'] });
+var tsSourceCode = CodeGen.getTypescriptCode({ className: 'Test', swagger: swagger, imports: ['../../typings/tsd.d.ts'], requestHelper: './index', apis: [] });
 console.log(nodejsSourceCode);
 console.log(angularjsSourceCode);
 console.log(reactjsSourceCode);
